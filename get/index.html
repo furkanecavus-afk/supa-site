@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supa — скачать в App Store</title>
+<meta name="description" content="Supa: редакционные шаблоны для историй и бесшовных каруселей в Instagram. Бесплатно на iPhone.">
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script>
+  // Sends the visitor straight on to Supa's App Store page. The campaign name (?ct=) is passed
+  // through so App Store Connect can count where installs came from.
+  (function () {
+    var ct = (new URLSearchParams(location.search).get('ct') || 'site').replace(/[^a-z0-9-]/gi, '').slice(0, 40);
+    var url = 'https://apps.apple.com/app/apple-store/id1474377262?pt=120298263&ct=' + ct + '&mt=8';
+    document.addEventListener('DOMContentLoaded', function () { document.getElementById('get').href = url; });
+    location.replace(url);
+  })();
+</script>
+</head>
+<body>
+<main style="text-align:center">
+  <div class="mark" style="justify-content:center"><img src="../icon.png" alt="">Supa</div>
+  <h1>Шаблоны для историй и каруселей</h1>
+  <p class="sub">46 редакционных шаблонов. Одно фото, три свайпа, ни одного шва. Бесплатно на iPhone.</p>
+  <p><a id="get" href="https://apps.apple.com/app/id1474377262"><strong>Открыть в App Store →</strong></a></p>
+  <footer style="justify-content:center">
+    <a href="../">Поддержка</a>
+    <a href="../privacy/">Конфиденциальность</a>
+    <span>© Supa</span>
+  </footer>
+</main>
+</body>
+</html>
