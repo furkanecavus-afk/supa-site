@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Supa — Connected</title>
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<main style="text-align:center">
+  <div class="mark" style="justify-content:center"><img src="../icon.png" alt="">Supa</div>
+  <h1 id="title">Almost done</h1>
+  <p class="sub" id="sub">Copy this code and paste it back where you started the connection. It expires in a few minutes.</p>
+  <p><code id="code" style="font-size:18px;word-break:break-all"></code></p>
+  <p><button id="copy" style="padding:10px 18px;border-radius:10px;border:0;font-weight:600">Copy code</button></p>
+  <script>
+    // OAuth return page for Supa's own TikTok connection. Shows the authorization code so the
+    // account owner can paste it into the local setup script; nothing is sent anywhere from here.
+    var q = new URLSearchParams(location.search), code = q.get('code'), err = q.get('error');
+    if (err) { document.getElementById('title').textContent = 'Not connected'; document.getElementById('sub').textContent = q.get('error_description') || err; document.getElementById('copy').style.display = 'none'; }
+    else if (!code) { document.getElementById('title').textContent = 'Supa'; document.getElementById('sub').textContent = 'This page finishes connecting Supa to its TikTok account.'; document.getElementById('copy').style.display = 'none'; }
+    else { document.getElementById('code').textContent = code; document.getElementById('copy').onclick = function () { navigator.clipboard.writeText(code); this.textContent = 'Copied'; }; }
+  </script>
+</main>
+</body>
+</html>
