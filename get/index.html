@@ -14,7 +14,17 @@
     var ct = (new URLSearchParams(location.search).get('ct') || 'site').replace(/[^a-z0-9-]/gi, '').slice(0, 40);
     var url = 'https://apps.apple.com/app/apple-store/id1474377262?pt=120298263&ct=' + ct + '&mt=8';
     document.addEventListener('DOMContentLoaded', function () { document.getElementById('get').href = url; });
-    location.replace(url);
+    // Anonymous landing count: which campaign link and which OS, nothing else. No cookies, no IDs kept,
+    // no IP stored; lets us check that ad clicks really arrive here before the App Store opens.
+    try {
+      var os = /iPhone|iPad|iPod/.test(navigator.userAgent) ? 'ios' : /Android/.test(navigator.userAgent) ? 'android' : 'other';
+      var inapp = /Instagram|FBAN|FBAV/.test(navigator.userAgent) ? 'instagram' : 'browser';
+      var body = JSON.stringify({ api_key: 'phc_zKAwyvBCU6E5mKK8G9rDhHBX7YnQVyLGJvu4bXSCmABA', event: 'get_landing',
+        distinct_id: 'anon-' + Math.random().toString(36).slice(2),
+        properties: { ct: ct, os: os, browser: inapp, build: 'web_get', $process_person_profile: false, $geoip_disable: true, $ip: null } });
+      navigator.sendBeacon('https://eu.i.posthog.com/capture/', new Blob([body], { type: 'text/plain' }));
+    } catch (e) {}
+    setTimeout(function () { location.replace(url); }, 150);
   })();
 </script>
 </head>
