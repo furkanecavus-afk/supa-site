@@ -1,0 +1,13 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex">
+<title>Supa · Threads connected</title>
+<style>body{margin:0;font:16px/1.5 -apple-system,system-ui,sans-serif;background:#0B0B0C;color:#F3F0EA;display:grid;place-items:center;min-height:100vh;padding:16px}
+main{max-width:460px;width:100%}h1{font-weight:500;font-size:24px}code{display:block;word-break:break-all;background:#151517;border-radius:10px;padding:14px;margin:12px 0;font-size:13px}
+button{background:#6DE8BB;color:#0B0B0C;border:0;border-radius:10px;padding:12px 18px;font-size:16px;font-weight:600}p{color:#9A968F}</style></head>
+<body><main><h1>Threads is almost connected</h1><p id="msg">Copy this one-time code and paste it into .env as THREADS_AUTH_CODE=… (it expires in an hour).</p>
+<code id="c">—</code><button id="b">Copy code</button></main>
+<script>
+const q=new URLSearchParams(location.search),c=(q.get('code')||'').replace(/#_$/,'');
+document.getElementById('c').textContent=c||(q.get('error_description')||'No code in this link.');
+if(!c){document.getElementById('b').style.display='none';document.getElementById('msg').textContent='Something went wrong:'}
+document.getElementById('b').onclick=()=>navigator.clipboard.writeText(c).then(()=>{document.getElementById('b').textContent='Copied'});
+</script></body></html>
