@@ -13,6 +13,9 @@
   (function () {
     var ct = (new URLSearchParams(location.search).get('ct') || 'site').replace(/[^a-z0-9-]/gi, '').slice(0, 40);
     var url = 'https://apps.apple.com/app/apple-store/id1474377262?pt=120298263&ct=' + ct + '&mt=8';
+    // Optional custom product page (?ppid=<uuid>): the App Store shows that page instead of the default one.
+    var ppid = (new URLSearchParams(location.search).get('ppid') || '').toLowerCase();
+    if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(ppid)) { url += '&ppid=' + ppid; }
     document.addEventListener('DOMContentLoaded', function () { document.getElementById('get').href = url; });
     // Anonymous landing count: which campaign link and which OS, nothing else. No cookies, no IDs kept,
     // no IP stored; lets us check that ad clicks really arrive here before the App Store opens.
